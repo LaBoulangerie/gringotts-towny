@@ -1,12 +1,12 @@
 package com.oglofus.gringotts.towny.town;
 
-import com.oglofus.gringotts.towny.TownyConfiguration;
-import com.palmergames.bukkit.towny.TownyUniverse;
-import com.palmergames.bukkit.towny.event.RenameTownEvent;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
-import com.palmergames.bukkit.towny.object.Resident;
-import com.palmergames.bukkit.towny.object.Town;
-import com.palmergames.bukkit.towny.object.TownyObject;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,12 +17,14 @@ import org.gestern.gringotts.GringottsAccount;
 import org.gestern.gringotts.accountholder.AccountHolder;
 import org.gestern.gringotts.accountholder.AccountHolderProvider;
 import org.gestern.gringotts.event.CalculateStartBalanceEvent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
+import com.oglofus.gringotts.towny.TownyConfiguration;
+import com.palmergames.bukkit.towny.TownyUniverse;
+import com.palmergames.bukkit.towny.event.RenameTownEvent;
+import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.object.Resident;
+import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.TownyObject;
 
 /**
  * The type Town holder provider.
@@ -35,7 +37,7 @@ public class TownHolderProvider implements AccountHolderProvider, Listener {
      * @return account holder for id
      */
     @Override
-    public @Nullable AccountHolder getAccountHolder(@NotNull String id) {
+    public @Nullable AccountHolder getAccountHolder(@Nonnull String id) {
         try {
             UUID targetUuid = UUID.fromString(id);
 
@@ -62,7 +64,7 @@ public class TownHolderProvider implements AccountHolderProvider, Listener {
      * @return account holder for id
      */
     @Override
-    public @Nullable AccountHolder getAccountHolder(@NotNull UUID uuid) {
+    public @Nullable AccountHolder getAccountHolder(@Nonnull UUID uuid) {
         Town town = TownyUniverse.getInstance().getTown(uuid);
 
         return getAccountHolder(town);
@@ -76,7 +78,7 @@ public class TownHolderProvider implements AccountHolderProvider, Listener {
      * any. null otherwise.
      */
     @Override
-    public @Nullable AccountHolder getAccountHolder(@NotNull OfflinePlayer player) {
+    public @Nullable AccountHolder getAccountHolder(@Nonnull OfflinePlayer player) {
         try {
             Resident resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
 
@@ -100,7 +102,7 @@ public class TownHolderProvider implements AccountHolderProvider, Listener {
      * @return the type
      */
     @Override
-    public @NotNull String getType() {
+    public @Nonnull String getType() {
         return TownAccountHolder.ACCOUNT_TYPE;
     }
 
@@ -110,7 +112,7 @@ public class TownHolderProvider implements AccountHolderProvider, Listener {
      * @return the account names
      */
     @Override
-    public @NotNull Set<String> getAccountNames() {
+    public @Nonnull Set<String> getAccountNames() {
         return TownyUniverse.getInstance().getTowns().stream().map(TownyObject::getName).collect(Collectors.toSet());
     }
 

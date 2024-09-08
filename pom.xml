@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.oglofus</groupId>
     <artifactId>gringotts-towny</artifactId>
-    <version>2.12.5</version>
+    <version>3.0.1-SNAPSHOT</version>
 
     <properties>
         <maven.deploy.skip>false</maven.deploy.skip>
@@ -107,7 +107,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.18.2-R0.1-SNAPSHOT</version>
+            <version>1.20.1-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -117,9 +117,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>minecraftwars</groupId>
+            <groupId>com.github.nikosgram</groupId>
             <artifactId>gringotts</artifactId>
-            <version>${version}</version>
+            <version>master-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -144,6 +144,10 @@
             <id>glaremasters repo</id>
             <url>https://repo.glaremasters.me/repository/towny/</url>
         </repository>
+        <repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
     </repositories>
 
     <distributionManagement>

@@ -1,13 +1,12 @@
 package com.oglofus.gringotts.towny.nation;
 
-import com.oglofus.gringotts.towny.TownyConfiguration;
-import com.palmergames.bukkit.towny.TownyUniverse;
-import com.palmergames.bukkit.towny.event.RenameNationEvent;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
-import com.palmergames.bukkit.towny.object.Nation;
-import com.palmergames.bukkit.towny.object.Resident;
-import com.palmergames.bukkit.towny.object.Town;
-import com.palmergames.bukkit.towny.object.TownyObject;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 import org.bukkit.OfflinePlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,12 +17,15 @@ import org.gestern.gringotts.GringottsAccount;
 import org.gestern.gringotts.accountholder.AccountHolder;
 import org.gestern.gringotts.accountholder.AccountHolderProvider;
 import org.gestern.gringotts.event.CalculateStartBalanceEvent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
+import com.oglofus.gringotts.towny.TownyConfiguration;
+import com.palmergames.bukkit.towny.TownyUniverse;
+import com.palmergames.bukkit.towny.event.RenameNationEvent;
+import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.object.Nation;
+import com.palmergames.bukkit.towny.object.Resident;
+import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.TownyObject;
 
 /**
  * The type Nation holder provider.
@@ -36,7 +38,7 @@ public class NationHolderProvider implements AccountHolderProvider, Listener {
      * @return account holder for id
      */
     @Override
-    public @Nullable AccountHolder getAccountHolder(@NotNull String id) {
+    public @Nullable AccountHolder getAccountHolder(@Nonnull String id) {
         try {
             UUID targetUuid = UUID.fromString(id);
 
@@ -63,7 +65,7 @@ public class NationHolderProvider implements AccountHolderProvider, Listener {
      * @return account holder for id
      */
     @Override
-    public @Nullable AccountHolder getAccountHolder(@NotNull UUID uuid) {
+    public @Nullable AccountHolder getAccountHolder(@Nonnull UUID uuid) {
         Nation nation = TownyUniverse.getInstance().getNation(uuid);
 
         return getAccountHolder(nation);
@@ -78,7 +80,7 @@ public class NationHolderProvider implements AccountHolderProvider, Listener {
      * any. null otherwise.
      */
     @Override
-    public @Nullable AccountHolder getAccountHolder(@NotNull OfflinePlayer player) {
+    public @Nullable AccountHolder getAccountHolder(@Nonnull OfflinePlayer player) {
         try {
             Resident resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
 
@@ -101,7 +103,7 @@ public class NationHolderProvider implements AccountHolderProvider, Listener {
      * @return the type
      */
     @Override
-    public @NotNull String getType() {
+    public @Nonnull String getType() {
         return NationAccountHolder.ACCOUNT_TYPE;
     }
 
@@ -111,7 +113,7 @@ public class NationHolderProvider implements AccountHolderProvider, Listener {
      * @return the account names
      */
     @Override
-    public @NotNull Set<String> getAccountNames() {
+    public @Nonnull Set<String> getAccountNames() {
         return TownyUniverse.getInstance().getNations().stream().map(TownyObject::getName).collect(Collectors.toSet());
     }
 

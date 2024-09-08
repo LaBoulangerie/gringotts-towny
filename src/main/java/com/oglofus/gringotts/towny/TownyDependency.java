@@ -163,7 +163,8 @@ public class TownyDependency implements Dependency, Listener {
             IntegerDataField townVaultCount = (IntegerDataField) town.getMetadata("vault_count");
             if (CONF.maxTownVaults == -1) { // Keep track of vaults created & return because there is no limit for them
                 townVaultCount.setValue(townVaultCount.getValue() + 1);
-                town.addMetaData(townVaultCount); // Saves to disk
+                town.addMetaData(townVaultCount);
+                town.save(); // Saves to disk
                 event.setOwner(owner);
                 event.setValid(true);
                 return;
@@ -177,7 +178,8 @@ public class TownyDependency implements Dependency, Listener {
             }
 
             townVaultCount.setValue(townVaultCount.getValue() + 1); // Saves to memory
-            town.addMetaData(townVaultCount); // Saves to disk
+            town.addMetaData(townVaultCount);
+            town.save(); // Saves to disk
 
             event.setOwner(owner);
             event.setValid(true);
@@ -220,7 +222,8 @@ public class TownyDependency implements Dependency, Listener {
             IntegerDataField nationVaultCount = (IntegerDataField) nation.getMetadata("vault_count");
             if (CONF.maxNationVaults == -1) { // Keep track of vaults created & return because there is no limit for them
                 nationVaultCount.setValue(nationVaultCount.getValue() + 1);
-                nation.addMetaData(nationVaultCount); // Saves to disk
+                nation.addMetaData(nationVaultCount);
+                nation.save(); // Saves to disk
                 event.setOwner(owner);
                 event.setValid(true);
                 return;
@@ -233,15 +236,16 @@ public class TownyDependency implements Dependency, Listener {
                 return;
             }
 
-            nationVaultCount.setValue(nationVaultCount.getValue() + 1); // Saves to memory
-            nation.addMetaData(nationVaultCount); // Saves to disk
+            nationVaultCount.setValue(nationVaultCount.getValue() + 1);
+            nation.addMetaData(nationVaultCount); // Saves to memory
+            nation.save(); // Saves to disk
 
             event.setOwner(owner);
             event.setValid(true);
         }
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void vaultDeleted(BlockBreakEvent event) {
         if (!Util.isValidContainer(event.getBlock().getType()) && !Tag.SIGNS.isTagged(event.getBlock().getType())) return;
 
@@ -261,7 +265,8 @@ public class TownyDependency implements Dependency, Listener {
                         IntegerDataField townVaultCount = (IntegerDataField) town.getMetadata("vault_count");
                         if (townVaultCount == null) break;
                         townVaultCount.setValue(townVaultCount.getValue() - 1); // Saves to memory
-                        town.addMetaData(townVaultCount); // Saves to disk
+                        town.addMetaData(townVaultCount);
+                        town.save(); // Saves to disk
 
                         break;
 
@@ -271,7 +276,8 @@ public class TownyDependency implements Dependency, Listener {
                         IntegerDataField nationVaultCount = (IntegerDataField) nation.getMetadata("vault_count");
                         if (nationVaultCount == null) break;
                         nationVaultCount.setValue(nationVaultCount.getValue() - 1); // Saves to memory
-                        nation.addMetaData(nationVaultCount); // Saves to disk
+                        nation.addMetaData(nationVaultCount);
+                        nation.save(); // Saves to disk
 
                         break;
 
