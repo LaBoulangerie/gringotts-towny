@@ -117,9 +117,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.nikosgram</groupId>
-            <artifactId>gringotts</artifactId>
-            <version>master-SNAPSHOT</version>
+            <groupId>com.github.LaBoulangerie</groupId>
+            <artifactId>Gringotts</artifactId>
+            <version>6dc0abcd0f</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
